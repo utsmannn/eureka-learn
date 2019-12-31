@@ -44,4 +44,9 @@ tasks.withType<KotlinCompile> {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "1.8"
 	}
+
+	copy {
+		from("build/libs/eureka-client-1-0.1.jar")
+		into("../eureka-server")
+	}
 }

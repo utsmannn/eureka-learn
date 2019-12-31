@@ -11,17 +11,12 @@ class ServerController {
 
     @RequestMapping("/start/{email}", method = [RequestMethod.POST])
     fun startService(@PathVariable("email") email: String): Responses {
-        val pathClient1 = "../../eureka-client-1/build/libs"
-        val jarCommand = "java -jar build/libs/eureka-client-1-0.1.jar --spring.application.instance_id=woy"
-        /*val permission = "chmod u+x /eureka-client-1-0.1.jar"
-        val permissionCommand = ProcessBuilder(permission)
-        permissionCommand.start()*/
-        val pb = ProcessBuilder("java -jar eureka-client-1-0.1.jar --spring.application.instance_id=$email")
-        //val pb = ProcessBuilder
-        //val pb = ProcessBuilder("ls")
-        val process = pb.start()
+        println("try start client")
+        val processBuilder = ProcessBuilder()
+        processBuilder.command("java", "-jar", "eureka-client-1-0.1.jar", "--spring.application.name=$email")
+        processBuilder.start()
 
-        return Responses("starting client user", process.outputStream.toString())
+        return Responses("starting client user", true)
     }
 }
 
